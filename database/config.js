@@ -8,7 +8,8 @@ dbConnection = async () => {
         await mongoose.connect( process.env.DB_CNN, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useCreateIndex: true
+            useCreateIndex: true,
+            useFindAndModify: false
         });
 
         console.log('DB Online');
@@ -18,6 +19,6 @@ dbConnection = async () => {
         throw new Error('Error al iniciar la conexión a la BBDD. Ver logs.');
     }
 
-}
+};
 
 module.exports = {dbConnection};
