@@ -8,14 +8,16 @@ const UsuarioSchema = Schema({
     },
     apellido1: {
         type: String,
-        required: true
     },
     apellido2: {
         type: String,
     },
     dni: {
         type: String,
-        required: true,
+    },
+    direccion: {
+        type: String,
+        default: 'Barcelona',
     },
     poblacion: {
         type: String,
@@ -37,7 +39,6 @@ const UsuarioSchema = Schema({
     },
     rol: {
         type: String,
-        required: true,
         default: 'usuario'
     },
     email: {

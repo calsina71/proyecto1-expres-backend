@@ -1,5 +1,3 @@
-const { Console } = require('console');
-const { json } = require('express');
 const jwt = require('jsonwebtoken');
 
 

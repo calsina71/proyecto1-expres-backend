@@ -2,55 +2,53 @@ const { Schema, model } = require ('mongoose');
 
 const ClienteSchema = Schema({
 
-    tipo: {
+    tipocliente: {
         type: String,
-        default: 'empresa'
+        require: true
     },
-    nombreComercial: {
-        type: String
-    },
-    nifCif: {
+    nombre: {
         type: String,
         required: true
     },
-    razonSocial: {
+    apellido1: {
         type: String,
         required: true
     },
-    personaContacto : {
+    apellido2: {
         type: String,
-        required: true
     },
-    telefono: {
+    dnicif: {
         type: String,
-        required: true
-    },
-    email: {
-        String,
-        required: true
-    },
-    web: {
-        type: String
-    },
-    logo: {
-        type: String
-    },
-    direccion: {
-        type: String
+        required: true,
     },
     poblacion: {
         type: String,
-        default: 'Barcelona'
+        default: 'Barcelona',
     },
     provincia: {
         type: String,
-        default: 'Barcelona'
+        default: 'Barcelona',
     },
     pais: {
         type: String,
-        default: 'España'
-    }
+        default: 'España',
+    },
+    foto: {
+        type: String,
+    },
+    telefono: {
+        type: String,
+    },
+    web: {
+        type: String,
+    },
     
+});
+
+
+ClienteSchema.method('toJSON', function() {
+    const { __v, ...object} = this.toObject();
+    return object;
 });
 
 

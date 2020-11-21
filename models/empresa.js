@@ -32,9 +32,13 @@ const ProyectoSchema = Schema({
     apellido2: {
         type: String,
     },
-    cif: {
+    nif: {
         type: String,
         required: true,
+    },
+    direccion: {
+        type: String,
+        default: 'Barcelona',
     },
     poblacion: {
         type: String,
@@ -47,9 +51,6 @@ const ProyectoSchema = Schema({
     pais: {
         type: String,
         default: 'España',
-    },
-    foto: {
-        type: String,
     },
     telefono: {
         type: String,

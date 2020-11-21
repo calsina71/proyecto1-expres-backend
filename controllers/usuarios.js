@@ -25,7 +25,7 @@ const getUsuarios = async( req, res) => {
 
 const crearUsuario = async( req, res ) => {
 
-    const { nombre, apellido1, dni, email, password } = req.body;
+    const { email, password } = req.body;
 
         
     try {

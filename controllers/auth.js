@@ -1,5 +1,6 @@
 
-const { response } = require('express');
+const { response } = require('express'); // Sólo para tener las ayudas del response
+
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcryptjs');
 const { generarJWT } = require('../helpers/jwt');
@@ -17,7 +18,7 @@ const login = async( req, res = response ) => {
         if( !usuarioDB ) {
             return res.status(404).json({
                 ok: false,
-                msg: 'email no válido',
+                msg: 'email y/o password incorrecto',
             });
         }
     
@@ -25,9 +26,9 @@ const login = async( req, res = response ) => {
         const validPassword = bcrypt.compareSync( password, usuarioDB.password );
 
         if( !validPassword ) {
-            return res.status(400).json({
+            return res.status(404).json({
                 ok: false,
-                msg: 'password incorrecto',
+                msg: 'email y/o password incorrecto',
             });
         } 
     
@@ -37,6 +38,7 @@ const login = async( req, res = response ) => {
 
         res.json({
             ok: true,
+            msg: 'Bienvenido',
             token
         });
     
@@ -51,6 +53,28 @@ const login = async( req, res = response ) => {
 
 };
 
+
+const renewToken = async(req, res = response) => {
+
+    const uid = req.uid;
+
+    // Generar el TOKEN - JWT
+    const token = await generarJWT( uid );
+
+    // Obtener el usuario por UID
+    const usuario = await Usuario.findById( uid );
+
+
+    res.json({
+        ok: true,
+        token,
+        usuario,
+        // menu: getMenuFrontEnd( usuario.role )
+    });
+
+}
+
 module.exports = { 
-    login 
+    login,
+    renewToken
 };

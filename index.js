@@ -27,6 +27,7 @@ dbConnection();
 // });
 
 // Rutas
+app.use( '/api/servicios', require('./routes/servicios') );
 app.use( '/api/usuarios', require('./routes/usuarios') );
 app.use( '/api/login', require('./routes/auth') );
 
