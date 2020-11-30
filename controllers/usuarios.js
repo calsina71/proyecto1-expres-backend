@@ -10,12 +10,23 @@ const { generarJWT } = require('../helpers/jwt');
 /*====================== LISTAR USUARIOS =====================*/
 
 const getUsuarios = async( req, res) => {
+
+    const desde = Number( req.query.desde ) || 0;
     
-    const usuarios = await Usuario.find({}, 'dni nombre apellido apellido email');
+    // const usuarios = await Usuario.find({}, 'dni nombre apellido apellido email');
+    const [usuarios, total] = await Promise.all([
+        Usuario
+            .find({}, 'nombre email rol foto')
+            .skip( desde )
+            .limit( 5 ),
+
+        Usuario.countDocuments()
+    ]);
 
     res.json( {
         ok: true,
         usuarios,      // Es equivalente a poner =  usuario: usuario
+        total
         //uid_peticion: req.uid   // el req.uid es el que se ha enviado desde el middleware validar-jwt.
     } );
 
